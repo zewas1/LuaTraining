@@ -49,10 +49,10 @@ end
 
 function love.mousepressed(x, y, button, istouch, presses)
     local mouseToTarget = distanceBetween(x, y, target.x, target.y)
-    local mouseToCenter = distanceToCenter(x, y, target.x, target.y)
+
     if button == 1 and mouseToTarget < target.radius and gameState == 2 then
         score = score + 1
-        if mouseToCenter < target.radius then
+        if mouseToTarget < target.radius - target.centerRadius then
             score = score + 1
         end
         target.x = math.random(target.radius,love.graphics.getWidth()-target.radius) 
@@ -68,8 +68,4 @@ end
 
 function distanceBetween(x1, y1, x2, y2)
     return math.sqrt((x2-x1)^2 + (y2-y1)^2)
-end
-
-function distanceToCenter(x1, y1, x2, y2)
-    return math.sqrt(((x2-target.centerRadius)-x1)^2 + ((y2-target.centerRadius)-y1)^2)
 end
