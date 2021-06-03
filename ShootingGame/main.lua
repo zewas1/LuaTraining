@@ -16,6 +16,8 @@ function love.load()
     sprites.crosshairs = love.graphics.newImage('sprites/crosshairs.png')
     sprites.target = love.graphics.newImage('sprites/target.png')
 
+    topScore = 0
+
     love.mouse.setVisible(false)
 end
 
@@ -38,7 +40,11 @@ function love.draw()
     love.graphics.print("Timer: " .. math.ceil(timer), 300, 5)
 
     if gameState == 1 then
+        if score > topScore then
+            topScore  = score
+        end
         love.graphics.printf("Click to start the game!", 0, 250, love.graphics.getWidth(), "center")
+        love.graphics.printf("Top score: " .. topScore, 0, 300, love.graphics.getWidth(), "center")
     end
 
     if gameState == 2 then
