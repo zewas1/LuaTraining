@@ -6,6 +6,7 @@ function love.load()
     target.centerRadius = 25
 
     score = 0
+    topScore = 0
     timer = 0
     gameState = 1
 
@@ -15,8 +16,6 @@ function love.load()
     sprites.sky = love.graphics.newImage('sprites/sky.png')
     sprites.crosshairs = love.graphics.newImage('sprites/crosshairs.png')
     sprites.target = love.graphics.newImage('sprites/target.png')
-
-    topScore = 0
 
     love.mouse.setVisible(false)
 end
@@ -63,6 +62,9 @@ function love.mousepressed(x, y, button, istouch, presses)
         end
         target.x = math.random(target.radius,love.graphics.getWidth()-target.radius) 
         target.y = math.random(target.radius,love.graphics.getHeight()-target.radius)
+
+    elseif button == 1 and mouseToTarget > target.radius and gameState == 2 then
+        score = score - 1
     end
     
     if button == 1 and gameState == 1 then
